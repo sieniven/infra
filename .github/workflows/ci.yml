@@ -50,5 +50,5 @@ jobs:
       - uses: dtolnay/rust-toolchain@4305c38b25d97ef35a8ad1f985ccf2d2242004f2 # stable
         with:
           components: rustfmt, clippy
-      - uses: extractions/setup-just@dd310ad5a97d8e7b41793f8817c4a3969ccb3ed1 # v1.4.0
+      - uses: extractions/setup-just@v3
       - run: just lint
