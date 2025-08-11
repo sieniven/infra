@@ -13,10 +13,6 @@ lint:
 test:
     cargo test --all-targets --all-features
 
-# Run flashblocks-archiver tests (excluding live Sepolia tests)
-test-flashblocks-archiver:
-    cargo test --package flashblocks-archiver
-
 # Run mempool rebroadcaster service
 run-mempool-rebroadcaster:
     cargo run -p mempool-rebroadcaster -- --geth-mempool-endpoint {{env_var("GETH_MEMPOOL_ENDPOINT")}} --reth-mempool-endpoint {{env_var("RETH_MEMPOOL_ENDPOINT")}}
