@@ -13,9 +13,21 @@ lint:
 test:
     cargo test --all-targets --all-features
 
+# Run flashblocks-archiver tests (excluding live Sepolia tests)
+test-flashblocks-archiver:
+    cargo test --package flashblocks-archiver
+
 # Run mempool rebroadcaster service
 run-mempool-rebroadcaster:
     cargo run -p mempool-rebroadcaster -- --geth-mempool-endpoint {{env_var("GETH_MEMPOOL_ENDPOINT")}} --reth-mempool-endpoint {{env_var("RETH_MEMPOOL_ENDPOINT")}}
+
+# Run flashblocks archiver service
+run-flashblocks-archiver:
+    cargo run -p flashblocks-archiver -- --database-url {{env_var("DATABASE_URL")}} --builder-urls {{env_var("FLASHBLOCKS_WEBSOCKET_URLS")}}
+
+# Run flashblocks archiver with config file
+run-flashblocks-archiver-config CONFIG_FILE:
+    cargo run -p flashblocks-archiver -- --config {{CONFIG_FILE}}
 
 # Build Docker image
 docker-image:
