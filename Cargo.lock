@@ -3300,6 +3300,8 @@ dependencies = [
  "chrono",
  "clap",
  "futures-util",
+ "metrics",
+ "metrics-derive",
  "op-alloy-consensus",
  "op-alloy-network",
  "op-alloy-rpc-jsonrpsee",
