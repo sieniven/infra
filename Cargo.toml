@@ -1,6 +1,6 @@
 [workspace]
 resolver = "2"
-members = ["crates/mempool-rebroadcaster"]
+members = ["crates/mempool-rebroadcaster", "crates/flashblocks-archiver"]
 
 [workspace.dependencies]
 clap = { version = "4.0", features = ["derive", "env"] }
@@ -9,3 +9,27 @@ tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
 tokio = { version = "1.0", features = ["full"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
+metrics = "0.24.1"
+metrics-derive = "0.1"
+
+# alloy
+alloy-primitives = { version = "1.2.0", default-features = false, features = [
+    "map-foldhash",
+] }
+alloy-genesis = { version = "1.0.23", default-features = false }
+alloy-eips = { version = "1.0.23", default-features = false }
+alloy-rpc-types = { version = "1.0.23", default-features = false }
+alloy-rpc-types-engine = { version = "1.0.23", default-features = false }
+alloy-rpc-types-eth = { version = "1.0.23" }
+alloy-consensus = { version = "1.0.23" }
+alloy-trie = { version = "0.9.0", default-features = false }
+alloy-provider = { version = "1.0.23" }
+alloy-hardforks = { version = "0.2.12" }
+alloy-rpc-client = { version = "1.0.23" }
+
+# op-alloy
+op-alloy-rpc-types = { version = "0.18.12", default-features = false }
+op-alloy-rpc-types-engine = { version = "0.18.12", default-features = false }
+op-alloy-rpc-jsonrpsee = { version = "0.18.12", default-features = false }
+op-alloy-network = { version = "0.18.12", default-features = false }
+op-alloy-consensus = { version = "0.18.12", default-features = false }
