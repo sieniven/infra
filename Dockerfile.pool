@@ -11,11 +11,6 @@ ENV CARGO_HOME=/usr/local/cargo
 WORKDIR /app
 COPY . .
 
-RUN PROFILE_FLAG=$([ "$RELEASE" = "true" ] && echo "--release" || echo "") && \
-    cargo chef cook $PROFILE_FLAG --recipe-path recipe.json
-
-COPY . .
-
 RUN cargo build --release --package=mempool-rebroadcaster && \
     cp target/release/mempool-rebroadcaster /tmp/mempool-rebroadcaster
 
