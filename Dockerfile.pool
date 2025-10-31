@@ -1,0 +1,30 @@
+FROM rust:1.88.0 AS builder
+
+ARG FEATURES
+ARG RELEASE=true
+
+RUN apt-get update \
+    && apt-get install -y clang libclang-dev
+
+ENV CARGO_HOME=/usr/local/cargo
+
+WORKDIR /app
+COPY . .
+
+RUN PROFILE_FLAG=$([ "$RELEASE" = "true" ] && echo "--release" || echo "") && \
+    cargo chef cook $PROFILE_FLAG --recipe-path recipe.json
+
+COPY . .
+
+RUN cargo build --release --package=mempool-rebroadcaster
+    cp target/release/mempool-rebroadcaster /tmp/mempool-rebroadcaster
+
+FROM ubuntu:24.04
+RUN apt-get update && apt-get install -y software-properties-common
+
+# Runtime container
+FROM ubuntu:24.04
+RUN apt-get update && apt-get install -y software-properties-common
+
+COPY --from=builder /tmp/mempool-rebroadcaster /usr/local/bin/mempool-rebroadcaster
+ENTRYPOINT ["/usr/local/bin/mempool-rebroadcaster"]
