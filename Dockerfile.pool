@@ -16,7 +16,7 @@ RUN PROFILE_FLAG=$([ "$RELEASE" = "true" ] && echo "--release" || echo "") && \
 
 COPY . .
 
-RUN cargo build --release --package=mempool-rebroadcaster
+RUN cargo build --release --package=mempool-rebroadcaster && \
     cp target/release/mempool-rebroadcaster /tmp/mempool-rebroadcaster
 
 FROM ubuntu:24.04
